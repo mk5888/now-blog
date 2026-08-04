@@ -1,0 +1,84 @@
+/*
+Theme Name: Moments
+Description: 極簡說說時光軸主題
+Version: 1.2
+Author: ken
+*/
+
+:root {
+  --bg: #f6f7f9; --card: #ffffff; --text: #1f2328; --muted: #8b949e;
+  --line: #e4e7eb; --accent: #4f7cff; --shadow: 0 1px 3px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101418; --card: #1a2027; --text: #e6e8eb; --muted: #7d8590;
+    --line: #2a313a; --accent: #6b95ff; --shadow: 0 1px 3px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101418; --card: #1a2027; --text: #e6e8eb; --muted: #7d8590;
+  --line: #2a313a; --accent: #6b95ff; --shadow: 0 1px 3px rgba(0,0,0,.4);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text);
+  font: 16px/1.75 -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  transition: background .25s, color .25s; }
+.wrap { max-width: 640px; margin: 0 auto; padding: 40px 16px 80px; }
+header.site { text-align: center; margin-bottom: 48px; }
+header.site h1 { font-size: 1.6em; letter-spacing: .02em; }
+header.site h1 a { color: var(--text); text-decoration: none; }
+header.site p { color: var(--muted); font-size: .9em; margin-top: 4px; }
+
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before { content: ""; position: absolute; left: 5px; top: 6px; bottom: 0;
+  width: 2px; background: var(--line); }
+.moment { position: relative; margin-bottom: 36px; }
+.moment::before { content: ""; position: absolute; left: -24px; top: 8px;
+  width: 12px; height: 12px; border-radius: 50%; background: var(--accent);
+  border: 2px solid var(--bg); }
+.moment time { display: block; color: var(--muted); font-size: .82em; margin-bottom: 8px; }
+.moment .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; box-shadow: var(--shadow); overflow-wrap: break-word; }
+.moment .card p { margin-bottom: .6em; }
+.moment .card p:last-child { margin-bottom: 0; }
+.moment .card a { color: var(--accent); text-decoration: none; word-break: break-all; }
+.moment .card a:hover { text-decoration: underline; }
+.moment .card img { max-width: 100%; border-radius: 8px; margin-top: 8px; display: block; }
+.moment .card audio { width: 100%; margin-top: 8px; }
+.moment .card h2.ptitle { font-size: 1.1em; margin-bottom: 8px; }
+.moment .card h2.ptitle a { color: var(--text); text-decoration: none; }
+.moment .card h2.ptitle a:hover { color: var(--accent); }
+.moment.private .card { border-style: dashed; opacity: .75; }
+.moment.private time::after { content: " · 私密"; color: var(--accent); }
+
+.year-sep { position: relative; margin: 40px 0 24px; color: var(--muted);
+  font-size: .9em; font-weight: 600; }
+
+/* 頁碼導航 */
+nav.pagenav { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  margin-top: 40px; font-size: .9em; }
+nav.pagenav .page-numbers { display: inline-block; min-width: 34px; text-align: center;
+  padding: 5px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--card); color: var(--text); text-decoration: none; }
+nav.pagenav .page-numbers:hover { border-color: var(--accent); color: var(--accent); }
+nav.pagenav .page-numbers.current { background: var(--accent); border-color: var(--accent); color: #fff; }
+nav.pagenav .page-numbers.dots { border: none; background: none; color: var(--muted); }
+footer.site { text-align: center; color: var(--muted); font-size: .8em; margin-top: 60px; }
+footer.site a { color: var(--muted); text-decoration: none; }
+footer.site a:hover { color: var(--accent); }
+
+/* 暗色開關 */
+#theme-toggle { position: fixed; right: 20px; bottom: 20px; width: 44px; height: 44px;
+  border-radius: 50%; border: 1px solid var(--line); background: var(--card);
+  box-shadow: var(--shadow); cursor: pointer; font-size: 20px; line-height: 1;
+  display: flex; align-items: center; justify-content: center; z-index: 99; }
+#theme-toggle:hover { border-color: var(--accent); }
+
+/* 防橫向溢出:寬表格/程式碼在卡片內滾動,頁面不出橫條 */
+.wrap { overflow-x: clip; }
+.moment .card table { display: block; overflow-x: auto; max-width: 100%; }
+.moment .card pre { overflow-x: auto; max-width: 100%; }
+.moment .card iframe, .moment .card video { max-width: 100%; }
+#theme-toggle { right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom)); left: auto; }
